@@ -1,0 +1,124 @@
+# Azure Resource Manager Template in YAML format
+
+# Define the schema and version
+$schema: https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#
+contentVersion: 1.0.0.0
+
+# Define parameters (e.g., location, names)
+parameters:
+  location:
+    type: string
+    defaultValue: East US
+  # Additional parameters like resource names, sizes, etc.
+
+# Define variables
+variables:
+  # Variables for resource names, configurations, etc.
+
+# Resources to be deployed
+
+resources:
+  # Hub Virtual Network
+  - type: Microsoft.Network/virtualNetworks
+    apiVersion: 2020-06-01
+    name: hubVNet
+    location: [parameters('location')]
+    properties:
+      # VNet properties, address space, subnets, etc.
+  
+  # Spoke Virtual Networks
+  - type: Microsoft.Network/virtualNetworks
+    apiVersion: 2020-06-01
+    name: spoke1VNet
+    location: [parameters('location')]
+    # Spoke VNet properties
+
+  - type: Microsoft.Network/virtualNetworks
+    apiVersion: 2020-06-01
+    name: spoke2VNet
+    location: [parameters('location')]
+    # Spoke VNet properties
+
+  # VNet Peering between Hub and Spokes
+  - type: Microsoft.Network/virtualNetworks/virtualNetworkPeerings
+    apiVersion: 2020-06-01
+    name: hubToSpoke1Peering
+    # Peering properties
+
+
+  # Azure Firewall in the Hub VNet
+  - type: Microsoft.Network/azureFirewalls
+    apiVersion: 2020-06-01
+    name: hubFirewall
+    location: [parameters('location')]
+    properties:
+      # Firewall properties, rules, and configurations
+      sku:
+        name: AZFW_VNet
+        tier: Standard
+      
+
+  # Application Gateway with WAF
+  - type: Microsoft.Network/applicationGateways
+    apiVersion: 2020-06-01
+    name: appGatewayWaf
+    location: [parameters('location')]
+    properties:
+      # Application Gateway properties, including WAF configuration
+      sku:
+        name: WAF_v2
+        tier: WAF_v2
+        # Define high availability rule
+        name: highAvailabilityRule
+        properties:
+          ruleType: Basic
+          backendAddressPool: 
+            backendAddressPoolId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendAddressPools/{backendPoolName}
+          httpListener:
+            httpListenerId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/httpListeners/{httpListenerName}
+          urlPathMap:
+            urlPathMapId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/urlPathMaps/{urlPathMapName}
+          ruleType: Basic
+          priority: 2 # Ajusta la prioridad según tus necesidades (debe ser menor que otras reglas)
+          ruleAction: RouteOverride
+          routeOverride:
+      routeType: Regional # Ruta a una región secundaria
+          overrideType: Override # Reemplazar la ruta principal
+         # Define region
+          region: WestUS
+        # Define availability zones for high availability
+        zones:
+            - "1"
+            - "2"
+            - "3"
+        # Additional properties like frontend IP configurations, etc.
+
+  # Storage Accounts for Hosting Static Websites
+  - type: Microsoft.Storage/storageAccounts
+    apiVersion: 2019-06-01
+    name: staticWebsiteStorage1
+    location: [parameters('location')]
+    properties:
+      # Storage account properties for static website hosting
+      accessTier: Hot
+      supportsHttpsTrafficOnly: true
+      kind: StorageV2
+      # ...
+
+  - type: Microsoft.Storage/storageAccounts
+    apiVersion: 2019-06-01
+    name: staticWebsiteStorage2
+    location: [parameters('location')]
+    properties:
+      # Storage account properties for static website hosting
+      accessTier: Hot
+      supportsHttpsTrafficOnly: true
+      kind: StorageV2
+      # ...
+
+# ... [Any additional resources and outputs]
+
+
+# Outputs (if any)
+outputs:
+  # Any outputs like endpoint URLs, resource IDs, etc.
