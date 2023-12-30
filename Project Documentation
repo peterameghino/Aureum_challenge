@@ -8,13 +8,13 @@ This document provides an overview of the DevOps technical exercise completed as
 
 The primary objective of this exercise was to create an Azure network infrastructure with the following components:
 
-1. Hub Virtual Network
-2. Two Spoke Virtual Networks
-3. VNet Peering between Hub and Spokes
-4. Azure Firewall in the Hub VNet
-5. Private Endpoint
-6. Application Gateway with Web Application Firewall (WAF)
-7. Storage Accounts for Hosting Static Websites
+1. **Hub Virtual Network**
+2. **Two Spoke Virtual Networks**
+3. **VNet Peering between Hub and Spokes**
+4. **Azure Firewall in the Hub VNet**
+5. **Private Endpoint**
+6. **Application Gateway with Web Application Firewall (WAF)**
+7. **Storage Accounts for Hosting Static Websites**
 
 ## Solution Description
 
@@ -40,9 +40,9 @@ Storage accounts were created in both Spoke VNets to host static websites. These
 
 ## Implementation Details
 
-- Parameters and Variables: The provided ARM template utilizes parameters and variables for flexibility and reusability. Key parameters include location and resource names.
+- **Parameters and Variables**: The provided ARM template utilizes parameters and variables for flexibility and reusability. Key parameters include location and resource names.
 
-- Deployment: The deployment process was described in the README, which includes modifying parameters and deploying the ARM template using Azure CLI, PowerShell, or the Azure Portal.
+- **Deployment**: The deployment process was described in the README, which includes modifying parameters and deploying the ARM template using Azure CLI, PowerShell, or the Azure Portal.
 
 ## Next Steps for Production Deployment
 
