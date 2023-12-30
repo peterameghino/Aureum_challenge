@@ -37,14 +37,13 @@ resources:
     apiVersion: 2020-06-01
     name: spoke2VNet
     location: [parameters('location')]
-    # Spoke VNet properties
+    # Spoke2 VNet properties
 
   # VNet Peering between Hub and Spokes
   - type: Microsoft.Network/virtualNetworks/virtualNetworkPeerings
     apiVersion: 2020-06-01
     name: hubToSpoke1Peering
     # Peering properties
-
 
   # Azure Firewall in the Hub VNet
   - type: Microsoft.Network/azureFirewalls
@@ -56,8 +55,16 @@ resources:
       sku:
         name: AZFW_VNet
         tier: Standard
-      
 
+  # Definition of Private Endpoint
+  - type: Microsoft.Network/privateEndpoints
+    apiVersion: 2020-06-01
+    name: private_endpoint
+    location: [parameters('location')]
+    properties:
+      # Specific properties of the private endpoint
+      # ...
+  
   # Application Gateway with WAF
   - type: Microsoft.Network/applicationGateways
     apiVersion: 2020-06-01
@@ -79,12 +86,12 @@ resources:
           urlPathMap:
             urlPathMapId: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/urlPathMaps/{urlPathMapName}
           ruleType: Basic
-          priority: 2 # Ajusta la prioridad según tus necesidades (debe ser menor que otras reglas)
+          priority: 2 # Adjust the priority according to your needs (it should be lower than other rules)
           ruleAction: RouteOverride
           routeOverride:
-      routeType: Regional # Ruta a una región secundaria
-          overrideType: Override # Reemplazar la ruta principal
-         # Define region
+      routeType: Regional # Route to a secondary region
+          overrideType: Override # Replace the main route
+          # Define region
           region: WestUS
         # Define availability zones for high availability
         zones:
@@ -99,10 +106,13 @@ resources:
     name: staticWebsiteStorage1
     location: [parameters('location')]
     properties:
-      # Storage account properties for static website hosting
       accessTier: Hot
       supportsHttpsTrafficOnly: true
       kind: StorageV2
+      staticWebsite: # Enabling Static Website Hosting in Storage Accounts
+        enabled: true
+        indexDocument: 'index.html'
+        errorDocument404Path: 'error.html'      
       # ...
 
   - type: Microsoft.Storage/storageAccounts
@@ -110,10 +120,13 @@ resources:
     name: staticWebsiteStorage2
     location: [parameters('location')]
     properties:
-      # Storage account properties for static website hosting
       accessTier: Hot
       supportsHttpsTrafficOnly: true
       kind: StorageV2
+      staticWebsite: # Enabling Static Website Hosting in Storage Accounts
+        enabled: true
+        indexDocument: 'index.html'
+        errorDocument404Path: 'error.html'
       # ...
 
 # ... [Any additional resources and outputs]
