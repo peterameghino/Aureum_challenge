@@ -20,7 +20,7 @@ The primary objective of this exercise was to create an Azure network infrastruc
 
 ### Hub-and-Spoke Architecture
 
-We implemented a hub-and-spoke network architecture to achieve network segmentation and isolation. The Hub VNet serves as the central hub for managing network traffic and hosting shared resources, while the Spoke VNets connect to the Hub and are used for specific regional purposes.
+Implemented a hub-and-spoke network architecture to achieve network segmentation and isolation. The Hub VNet serves as the central hub for managing network traffic and hosting shared resources, while the Spoke VNets connect to the Hub and are used for specific regional purposes.
 
 ### Network Security
 
