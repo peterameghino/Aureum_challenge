@@ -2,7 +2,7 @@ Azure Infrastructure as Code (IaC) - Hub-and-Spoke Network Topology
 
 Overview
 
-This repository contains Azure Resource Manager (ARM) templates to deploy a hub-and-spoke network architecture on Microsoft Azure as part of Aureum Technologies challenge. The architecture is designed to meet the exercise requirements for a DevOps position interview. It includes the following components:
+This repository contains Azure Resource Manager (ARM) templates to deploy a hub-and-spoke network architecture on Microsoft Azure as part of Aureum Technologies challenge. It includes the following components:
 
 1. Hub Virtual Network
 2. Two Spoke Virtual Networks
