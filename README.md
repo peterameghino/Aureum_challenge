@@ -86,4 +86,22 @@ Important Notes
 - Ensure that you have the necessary Azure permissions to create and manage these resources.
 - Follow Azure best practices for security, naming conventions, and resource management.
 
+ # Official Documentation Used
+
+Below is a list of resources from Microsoft Azure's official documentation and other sources that were referenced for creating the YAML in this exercise:
+
+1. [Azure Resource Manager Templates (ARM Templates)](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/): Official documentation on ARM Templates, used to describe and deploy Azure resources declaratively.
+2. [Azure Virtual Network](https://docs.microsoft.com/en-us/azure/virtual-network/): Documentation covering Azure Virtual Network creation and configuration.
+3. [Azure Firewall](https://docs.microsoft.com/en-us/azure/firewall/): In-depth information about Azure Firewall and how it can be used to protect Azure Virtual Networks.
+4. [Azure Private Endpoint](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview): Documentation on Azure Private Endpoint, enabling private connectivity to Azure services.
+5. [Azure Application Gateway](https://docs.microsoft.com/en-us/azure/application-gateway/): Information about Azure Application Gateway, providing load balancing and web application services.
+6. [Web Application Firewall (WAF)](https://docs.microsoft.com/en-us/azure/web-application-firewall/): Details on Azure's Web Application Firewall (WAF), safeguarding web applications against threats.
+7. [Static website hosting in Azure Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website): Guide on enabling static website hosting in Azure Storage accounts.
+8. [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/): Official documentation for the Azure Command-Line Interface (CLI) used to interact with Azure from the command line.
+9. [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/azure/): Information on Azure PowerShell, a tool for managing Azure services through PowerShell commands.
+10. [Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/): Azure DevOps documentation, which can be used to implement CI/CD practices in Azure.
+
+
+
+
 
